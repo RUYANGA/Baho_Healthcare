@@ -4,7 +4,7 @@ const bcrypt=require('bcrypt');
 const {addMinutes}=require('date-fns');
 const crypto=require('crypto');
 const {transipoter}=require('../middlewares/nodemailer');
-const doctor = require('../modeles/doctor');
+
 
 
 
