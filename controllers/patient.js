@@ -306,7 +306,15 @@ const lognOut=async(req,res,next)=>{
 const updateUser=async(req,res,next)=>{
   try {
       
-       const {Fname,Lname,eEmail,Password}=req.body;
+       const {Fname,Lname,Email,Password}=req.body;
+       const errors=validationResult(req);
+       if(!errors.isEmpty()){
+           const errorFormat=errors.array().map(err=>({
+               message:err.msg
+           }))
+           return res.status(400).json({error:errorFormat});
+       };
+ 
        
        const id=req.session.user._id;
        if(!id)return res.status(400).json({message:'User id required'});
@@ -319,7 +327,7 @@ const updateUser=async(req,res,next)=>{
        
        let userSave;
        try {
-           userSave=await User.findByIdAndUpdate({_id:id},{$set:{Fname,Lname,Email,Password:Password ? hashPassword:user.Password}},{new:true});
+           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname,Lname,Email,Password:Password ? hashPassword:user.Password}},{new:true});
        } catch (error) {
          const errors= new Error(error);
          errors.statusCode=500;

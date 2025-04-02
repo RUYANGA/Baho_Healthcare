@@ -3,7 +3,8 @@ const {
     siginupValidator,
     verifyValidator,
     resendOtpValidator,
-    loginValidator
+    loginValidator,
+    updatePatientValidation
 
 }=require('../middlewares/validations');
 
@@ -15,7 +16,8 @@ const {
     resendOtp,
     Login,
     lognOut,
-    Dashboard
+    Dashboard,
+    updateUser
 
 }=require('../controllers/patient')
 
@@ -28,5 +30,6 @@ router.post('/resendOtp',resendOtpValidator,resendOtp);
 router.post('/login',loginValidator,Login);
 router.post('/dashboard',unauthrized,Dashboard);
 router.post('/lognout',unauthrized,lognOut);
+router.post('/update',unauthrized,updateUser);
 
 module.exports=router

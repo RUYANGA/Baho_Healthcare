@@ -130,6 +130,21 @@ const loginValidator=[
     .withMessage('Provide password!')
 ];
 
+// const updatePatientValidation=[
+//     body('Fname')
+//     .trim()
+//     .escape(),
+//     body('Lname')
+//     .toUpperCase()
+//     .trim()
+//     .escape(),
+//     body('Email')
+//     .escape(),
+//     body('Password')
+//     .trim()
+//     .escape()
+// ]
+
 
 
 
