@@ -302,6 +302,40 @@ const lognOut=async(req,res,next)=>{
   }
 };
 
+
+const updateUser=async(req,res,next)=>{
+  try {
+      
+       const {Fname,Lname,eEmail,Password}=req.body;
+       
+       const id=req.session.user._id;
+       if(!id)return res.status(400).json({message:'User id required'});
+       const user=await Patient.findById({_id:id})
+       if(!user)return res.status(404).json({message:'User not found'});
+       let hashPassword
+       if(Password){
+          hashPassword=await bcrypt.hash(Password,10);
+       };
+       
+       let userSave;
+       try {
+           userSave=await User.findByIdAndUpdate({_id:id},{$set:{Fname,Lname,Email,Password:Password ? hashPassword:user.Password}},{new:true});
+       } catch (error) {
+         const errors= new Error(error);
+         errors.statusCode=500;
+         return next(errors);
+       } ;
+
+       res.status(200).json({User:'User updated successfully!, please check your dashboard'});
+
+  } catch (error) {
+
+     const errors= new Error(error);
+     errors.statusCode=500;
+     return next(errors);
+  }
+};
+
 const Dashboard=async(req,res,next)=>{
 
   const user=await Patient.find({_id:req.session.user._id}).populate('Doctor');
@@ -312,4 +346,4 @@ const Dashboard=async(req,res,next)=>{
 }
 
 
-module.exports={Register,verifyOtp,resendOtp,Login ,lognOut,Dashboard}
+module.exports={Register,verifyOtp,resendOtp,Login ,lognOut,Dashboard,updateUser}
