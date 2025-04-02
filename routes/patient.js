@@ -1,5 +1,4 @@
 const authControler=require('../controllers/patient');
-const {body}=require('express-validator')
 const {
     siginupValidator,
     verifyValidator,
