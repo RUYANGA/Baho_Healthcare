@@ -93,7 +93,7 @@ const resendOtpValidator=[
                 return Promise.reject(
                     'User with emaill not found'
                 )
-            }else if(user.isVeryfied){
+            }else if(user.isVerified){
                 return Promise.reject(
                     'Email already verified'
                 )

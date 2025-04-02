@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 const patientRoute=require('./routes/patient')
 const session=require('express-session');
 const {addWeeks}=require('date-fns')
-const port=process.env.PORT;
+const port=process.env.PORT || 2000;
 const cors=require('cors')
 const sessionStore=require('connect-mongo')
 
@@ -36,8 +36,8 @@ app.use(session({
         mongoUrl:process.env.DB_URL
     }),
     cookie:{
-        secure:true,
-        httpOnly:true,
+        secure:false,
+        httpOnly:false,
         maxAge:1000*60*60*24*7
     }
 }))

@@ -30,7 +30,7 @@ const Register=async(req,res,next)=>{
             Lname,
             Email,
             Password:hashPassword,
-            otp,
+            Otp:otp,
             otpExpired
         })
       
@@ -105,7 +105,7 @@ const Register=async(req,res,next)=>{
         </body>
         </html>`
         })
-        res.status(200).json({message:'User register successfully',user});
+        res.status(200).json({message:'User register successfully'});
 
     } catch (error) {
         const errors=new Error(error);
@@ -257,7 +257,7 @@ const resendOtp=async(req,res,next)=>{
 const Login=async(req,res,next)=>{
 
   try {
-      const {email,password}=req.body;
+      const {Email,Password}=req.body;
 
       const errors=validationResult(req);
       if(!errors.isEmpty()){
@@ -267,12 +267,12 @@ const Login=async(req,res,next)=>{
           return res.status(400).json({error:errorFormat});
       };
 
-      const user =await User.findOne({email:email});
+      const user =await Patient.findOne({Email:Email});
 
-      if(!await bcrypt.compare(password,user.password)){
+      if(!await bcrypt.compare(Password,user.Password)){
          return res.status(401).json({message:'Email or password incorect!'});
       };
-      req.session.user=user;
+      req.session.user=user
       res.status(200).json({message:'Login successfully!'});
 
   } catch (error) {
@@ -304,23 +304,9 @@ const lognOut=async(req,res,next)=>{
 
 const Dashboard=async(req,res,next)=>{
 
-  const user=await User.find({_id:req.session.user._id}).select('Fname Lname email _id phone').populate('Doctor');
+  const user=await Patient.find({_id:req.session.user._id}).populate('Doctor');
   if(!user)return res.status(400).json({message:"User not found"});
-  const returnUser=user.map(user=>({
-      UserId:user._id,
-      FirstName:user.Fname,
-      LastName:user.Lname,
-      Email:user.email,
-      Doctor:user.Employees.map(doctor=>({
-          doctorId:doctor._id,
-          doc_FirstName:doctor.Fname,
-          doc_LastName:doctor.LName,
-          doc_Email:doctor.email,
-          doc_PhoneNumber:doctor.phone,
-          
-          
-      }))
-  }))
+ 
 
   res.status(200).json({Dashboard:user})
 }
