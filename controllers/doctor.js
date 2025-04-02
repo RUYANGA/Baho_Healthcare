@@ -19,7 +19,7 @@ const Register=async(req,res,next)=>{
             }))
             return res.status(500).json({error:formatError});
         }
-        const {Fname,Lname,Email,Password}=req.body
+        const {Fname,Lname,Email,Password,phone,BirthDate,provence,Spectialisation,currentEmployer,priviousEmployer,gradYear,medSchool,LicenseImage,Language,Bio,Idimage}=req.body
 
         const hashPassword= await bcrypt.hash(Password,12);
         const otp=crypto.randomInt(100000,999999).toString()
