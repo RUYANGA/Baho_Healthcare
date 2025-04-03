@@ -21,20 +21,20 @@ mongoose.connect(process.env.DB_URL).then(()=>{
 
 
 app.use(express.json());
-// app.use(cors({
-//     origin:process.env.FRONTEND_URL,
-//     allowedHeaders: "Content-Type, Authorization",
-//     credentials:true,
-//     methods:['GET','POST','PUT','PUCH','DELETE']
-// }))
+app.use(cors({
+    origin:process.env.FRONTEND_URL,
+    allowedHeaders: "Content-Type, Authorization",
+    credentials:true,
+    methods:['GET','POST','PUT','PUCH','DELETE']
+}))
 
 app.use(session({
-    secret:process.env.SESSION_SECURITY,
-    resave:false,
-    saveUninitialized:false,
-    store:sessionStore.create({
-        mongoUrl:process.env.DB_URL
-    }),
+    // secret:process.env.SESSION_SECURITY,
+    // resave:false,
+    // saveUninitialized:false,
+    // store:sessionStore.create({
+    //     mongoUrl:process.env.DB_URL
+    // }),
     cookie:{
         secure:false,
         httpOnly:false,
