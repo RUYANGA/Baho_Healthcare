@@ -124,3 +124,39 @@ const Register=async(req,res,next)=>{
         return next(errors)
     }
 }
+
+const verifyOtp=async(req,res,next)=>{
+  try {
+
+        const {Email,Otp}=req.body;
+
+        const errors=validationResult(req);
+        if(!errors.isEmpty()){
+            const errorFormat=errors.array().map(err=>({
+                message:err.msg
+            }))
+            return res.status(400).json({error:errorFormat})
+        }
+      
+       
+        const doctor=await Doctor.findOne({Email:Email});
+        if(doctor.otp !==Otp || doctor.otpExpired < new Date()){
+            return res.status(400).json({message:"Otp expired or invalid !"});
+        } 
+
+        doctor.otp=undefined;
+        doctor.otpExpired=undefined;
+        doctor.isVerified=true
+        await doctor.save()
+
+        res.status(200).json({message:"Email is verified successfuly. Now you can login"});
+
+  } catch (error) {
+
+        const err=new Error(error);
+        err.status=500
+        next(err)
+
+  }
+}
+
