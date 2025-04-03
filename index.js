@@ -29,12 +29,12 @@ app.use(cors({
 }))
 
 app.use(session({
-    // secret:process.env.SESSION_SECURITY,
-    // resave:false,
-    // saveUninitialized:false,
-    // store:sessionStore.create({
-    //     mongoUrl:process.env.DB_URL
-    // }),
+    secret:process.env.SESSION_SECURITY,
+    resave:false,
+    saveUninitialized:false,
+    store:sessionStore.create({
+        mongoUrl:process.env.DB_URL
+    }),
     cookie:{
         secure:false,
         httpOnly:false,
