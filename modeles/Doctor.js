@@ -65,17 +65,17 @@ const doctorSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    // Patient:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"Patient"
-    // },
-    // isVeryfied:{
-    //     type:Boolean,
-    //     default:false
-    // },
-    // otp:{
-    //     type:String
-    // },
+    Patient:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Patient"
+    },
+    isVeryfied:{
+        type:Boolean,
+        default:false
+    },
+    otp:{
+        type:String
+    },
     otpExpired:{
         type:Date
     },
