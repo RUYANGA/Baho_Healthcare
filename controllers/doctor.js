@@ -118,9 +118,9 @@ const Register=async(req,res,next)=>{
         })
         res.status(200).json({message:'User register successfully',user});
 
-    } catch (error) {
-        const errors=new Error(error);
-        errors.statusCode=500;
-        return next(errors)
-    }
-}
+//     } catch (error) {
+//         const errors=new Error(error);
+//         errors.statusCode=500;
+//         return next(errors)
+//     }
+// }
