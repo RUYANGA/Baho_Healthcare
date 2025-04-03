@@ -148,4 +148,4 @@ const updatePatientValidation=[
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation}

@@ -327,7 +327,7 @@ const updateUser=async(req,res,next)=>{
        
        let userSave;
        try {
-           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname:Fname? Fname:user.Fname,Lname,Email,Password:Password ? hashPassword:user.Password}},{new:true});
+           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname:Fname? Fname:user.Fname,Lname:Lname ? Lname:user.Lname,Email:Email ? Email:user.Email,Password:Password ? hashPassword:user.Password}},{new:true});
        } catch (error) {
          const errors= new Error(error);
          errors.statusCode=500;

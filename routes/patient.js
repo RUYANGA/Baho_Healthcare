@@ -30,6 +30,6 @@ router.post('/resendOtp',resendOtpValidator,resendOtp);
 router.post('/login',loginValidator,Login);
 router.post('/dashboard',unauthrized,Dashboard);
 router.post('/lognout',unauthrized,lognOut);
-router.post('/update',unauthrized,updateUser);
+router.post('/update',unauthrized,updatePatientValidation,updateUser);
 
 module.exports=router
