@@ -1,5 +1,6 @@
 const { body }=require('express-validator')
-const Patient=require('../modeles/Patient')
+const Patient=require('../modeles/Patient');
+const Doctor = require('../modeles/Doctor');
 
 
 
@@ -45,6 +46,47 @@ const siginupValidator=[
     .withMessage('Password must be contain character , numbers ,symbol and 8 length')
 ];
 
+const doctorSignup=[
+    body('Fname')
+    .notEmpty()
+    .withMessage('email requie')
+    .isAlpha()
+    .isLength({min:3})
+    .trim()
+    .escape()
+    .withMessage('First name must be atleast 3 characters!'),
+    body('Lname')
+    .notEmpty()
+    .isLength({min:3})
+    .withMessage('Last name must be atleast 3 character!')
+    .toUpperCase()
+    .trim()
+    .escape(),
+    body('Email')
+    .notEmpty()
+    .normalizeEmail()
+    .withMessage('Email is required')
+    .toLowerCase()
+    .trim()
+    .escape()
+    .withMessage('Provide a valid email format')
+    .custom((email,{req})=>{
+        return Doctor.findOne({Email:email})
+        .then(user=>{
+            if(user){
+                return Promise.reject(
+                    'User with email taken , choose another one'
+                )
+            }
+        })
+    }),
+    body('Password')
+    .notEmpty()
+    .isLength({min:5})
+    .trim()
+    .escape()
+    .withMessage('Password must be contain character , numbers ,symbol and 8 length')
+];
 
 const verifyValidator=[
     body('Email')
