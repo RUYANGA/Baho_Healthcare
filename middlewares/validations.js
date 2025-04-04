@@ -86,10 +86,10 @@ const doctorSignup=[
     .trim()
     .escape()
     .withMessage('Password must be contain character , numbers ,symbol and 8 length'),
-    // body('phone')
-    // .notEmpty()
-    // .isNumeric()
-    // .withMessage('Phone number is required')
+    body('phone')
+    .notEmpty()
+    .isNumeric()
+    .withMessage('Phone number is required')
 ];
 
 const verifyValidator=[
