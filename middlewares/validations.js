@@ -117,6 +117,16 @@ const doctorSignup=[
     .isLength({min:3})
     .escape()
     .withMessage('Privious employee required'),
+    body('gradYear')
+    .notEmpty()
+    .isDate()
+    .escape()
+    .withMessage('Provide graduation year!'),
+    body('medSchool')
+    .notEmpty()
+    .escape()
+    .withMessage('Medical shool is required')
+
 
 
     
