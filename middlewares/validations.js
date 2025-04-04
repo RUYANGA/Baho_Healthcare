@@ -89,7 +89,10 @@ const doctorSignup=[
     body('phone')
     .notEmpty()
     .isNumeric()
-    .withMessage('Phone number is required')
+    .withMessage('Phone number is required'),
+    body('BirthDate')
+    .notEmpty()
+    .withMessage('Birth date required')
 ];
 
 const verifyValidator=[
