@@ -92,7 +92,22 @@ const doctorSignup=[
     .withMessage('Phone number is required'),
     body('BirthDate')
     .notEmpty()
-    .withMessage('Birth date required')
+    .escape()
+    .withMessage('Birth date required'),
+    body('provence')
+    .notEmpty()
+    .escape()
+    .isAlpha()
+    .isLength({min:3})
+    .withMessage('Provence required and 3 character'),
+    body('Spectialisation')
+    .notEmpty()
+    .escape()
+    .isAlpha()
+    .isLength({min:2})
+    .withMessage('Specialisation required ')
+
+    
 ];
 
 const verifyValidator=[
