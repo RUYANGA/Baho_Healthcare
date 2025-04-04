@@ -105,7 +105,19 @@ const doctorSignup=[
     .escape()
     .isAlpha()
     .isLength({min:2})
-    .withMessage('Specialisation required ')
+    .withMessage('Specialisation required '),
+    body('currentEmployer')
+    .notEmpty()
+    .escape()
+    .isAlpha()
+    .isLength({min:3})
+    .withMessage('Current Employee required!'),
+    body('priviousEmployer')
+    .notEmpty()
+    .isLength({min:3})
+    .escape()
+    .withMessage('Privious employee required'),
+
 
     
 ];
