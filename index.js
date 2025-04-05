@@ -23,7 +23,7 @@ mongoose.connect(process.env.DB_URL).then(()=>{
 app.use(express.json());
 app.use(cors({
     origin:process.env.FRONTEND_URL,
-    allowedHeaders: "Content-Type, Authorization",
+    allowedHeaders: "Content-Type",
     credentials:true,
     methods:['GET','POST','PUT','PUCH','DELETE']
 }))
