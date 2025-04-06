@@ -51,7 +51,7 @@ const doctorSchema=new mongoose.Schema({
     },
     LicenseImage:{
         type:String,
-        required:true
+        //required:true
     },
     Language:{
         type:Array,
@@ -63,7 +63,7 @@ const doctorSchema=new mongoose.Schema({
     },
     Idimage:{
         type:String,
-        required:true
+        //required:true
     },
     Patient:{
         type:mongoose.Schema.Types.ObjectId,
