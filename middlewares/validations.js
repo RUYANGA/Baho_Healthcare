@@ -7,14 +7,15 @@ const Doctor = require('../modeles/Doctor');
 const siginupValidator=[
     body('Fname')
     .notEmpty()
+    .isString()
     .withMessage('email requie')
-    .isAlpha()
     .isLength({min:3})
     .trim()
     .escape()
     .withMessage('First name must be atleast 3 characters!'),
     body('Lname')
     .notEmpty()
+    .isString()
     .isLength({min:3})
     .withMessage('Last name must be atleast 3 character!')
     .toUpperCase()
@@ -50,13 +51,14 @@ const doctorSignup=[
     body('Fname')
     .notEmpty()
     .withMessage('email requie')
-    .isAlpha()
+    .isString()
     .isLength({min:3})
     .trim()
     .escape()
     .withMessage('First name must be atleast 3 characters!'),
     body('Lname')
     .notEmpty()
+    .isString()
     .isLength({min:3})
     .withMessage('Last name must be atleast 3 character!')
     .toUpperCase()
@@ -97,7 +99,7 @@ const doctorSignup=[
     body('provence')
     .notEmpty()
     .escape()
-    .isAlpha()
+    .isString()
     .isLength({min:3})
     .withMessage('Provence required and 3 character'),
     body('Spectialisation')
@@ -109,11 +111,12 @@ const doctorSignup=[
     body('currentEmployer')
     .notEmpty()
     .escape()
-    .isAlpha()
+    .isString()
     .isLength({min:3})
     .withMessage('Current Employee required!'),
     body('priviousEmployer')
     .notEmpty()
+    .isString()
     .isLength({min:3})
     .escape()
     .withMessage('Privious employee required'),
@@ -124,6 +127,7 @@ const doctorSignup=[
     .withMessage('Provide graduation year!'),
     body('medSchool')
     .notEmpty()
+    .isString()
     .escape()
     .withMessage('Medical shool is required')
 

@@ -98,13 +98,13 @@ const Register=async(req,res,next)=>{
                     <div style="margin-top: 20px;">
                       <a href="https://www.facebook.com/ruyanga.merci.1" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
                       
-                        <i class="bi bi-facebook"></i>
+                        Facebook
                       </a>
                       <a href="https://x.com/RuyangaM" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
-                        <i class="bi bi-twitter-x"></i>
+                        X-Twitter
                       </a>
                       <a href="https://github.com/RUYANGA" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
-                        <i class="bi bi-github"></i>
+                        Github
                       </a>
                     </div>
                   </div>

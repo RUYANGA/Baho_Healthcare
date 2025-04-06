@@ -46,7 +46,9 @@ app.use(session({
 
 app.use('/api/patient',patientRoute),
 app.use('/',(req,res)=>{
-    res.send(`<!DOCTYPE html>
+    res.send(`
+        
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -453,16 +455,9 @@ app.use('/',(req,res)=>{
 
 
 
-`)
-    }
-)
+`)})
 
 
 app.use((error,req,res,next)=>{
     return res.status(500).json({Error:error.message || 'Something went wronge'})
 });
-
-
-
-
-
