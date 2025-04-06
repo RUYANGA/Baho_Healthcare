@@ -8,6 +8,8 @@ const {
 
 }=require('../middlewares/validations');
 
+const Upload=require('../middlewares/uploadFiles')
+
 const {unauthrized,Admin}=require('../middlewares/authorize')
 
 const {
@@ -22,7 +24,7 @@ const {
 }=require('../controllers/patient')
 
 const router=require('express').Router();
-router.post('/signup',siginupValidator,Register);
+router.post('/signup',siginupValidator,Upload,Register);
 
 router.post('/verify',verifyValidator,verifyOtp);
 router.post('/resendOtp',resendOtpValidator,resendOtp);
