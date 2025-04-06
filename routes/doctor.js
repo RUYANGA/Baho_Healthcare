@@ -24,7 +24,7 @@ const {
 }=require('../controllers/patient')
 
 const router=require('express').Router();
-router.post('/signup',siginupValidator,Upload,Register);
+router.post('/signup',siginupValidator,Upload.single('image'),Register);
 
 router.post('/verify',verifyValidator,verifyOtp);
 router.post('/resendOtp',resendOtpValidator,resendOtp);

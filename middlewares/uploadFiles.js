@@ -13,9 +13,9 @@ const Filestorage=multer.diskStorage({
 
 const Fileformat=(req,file,cb)=>{
     if(
-        file.mimetype === 'Uploads/png' ||
-        file.mimetype === 'Uploads/jpg' ||
-        file.mimetype === 'Uploads/jpeg'
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg'
 
 
     ){
