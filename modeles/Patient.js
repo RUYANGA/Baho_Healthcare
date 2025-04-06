@@ -30,6 +30,9 @@ const userSchem=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Doctor"
     },
+    image:{
+        type:String
+    },
     isVerified:{
         type:Boolean,
         default:false

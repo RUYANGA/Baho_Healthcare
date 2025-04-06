@@ -19,7 +19,8 @@ const {
     Dashboard,
     updateUser
 
-}=require('../controllers/patient')
+}=require('../controllers/patient');
+const Upload = require('../middlewares/uploadFiles');
 
 const router=require('express').Router();
 router.post('/signup',siginupValidator,Register);
@@ -30,6 +31,6 @@ router.post('/resendOtp',resendOtpValidator,resendOtp);
 router.post('/login',loginValidator,Login);
 router.post('/dashboard',unauthrized,Dashboard);
 router.post('/lognout',unauthrized,lognOut);
-router.post('/update',unauthrized,updatePatientValidation,updateUser);
+router.post('/update',unauthrized,updatePatientValidation,Upload.single('image'),updateUser);
 
 module.exports=router

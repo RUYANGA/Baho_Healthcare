@@ -3,6 +3,7 @@ const {validationResult}=require('express-validator');
 const bcrypt=require('bcrypt');
 const {addMinutes}=require('date-fns');
 const crypto=require('crypto');
+const path=require('path');
 const {transipoter}=require('../middlewares/nodemailer');
 
 
@@ -308,6 +309,7 @@ const updateUser=async(req,res,next)=>{
       
        const {Fname,Lname,Email,Password}=req.body;
        const errors=validationResult(req);
+       const imageUrl=req.file.path
        if(!errors.isEmpty()){
            const errorFormat=errors.array().map(err=>({
                message:err.msg
@@ -327,7 +329,7 @@ const updateUser=async(req,res,next)=>{
        
        let userSave;
        try {
-           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname:Fname? Fname:user.Fname,Lname:Lname ? Lname:user.Lname,Email:Email ? Email:user.Email,Password:Password ? hashPassword:user.Password}},{new:true});
+           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname:Fname? Fname:user.Fname,Lname:Lname ? Lname:user.Lname,Email:Email ? Email:user.Email,Password:Password ? hashPassword:user.Password,image:imageUrl}},{new:true});
        } catch (error) {
          const errors= new Error(error);
          errors.statusCode=500;
