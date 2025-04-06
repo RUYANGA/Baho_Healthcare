@@ -3,7 +3,8 @@ const {
     verifyValidator,
     resendOtpValidator,
     loginValidator,
-    updatePatientValidation
+    updatePatientValidation,
+    forgetPasswordValidation
 
 }=require('../middlewares/validations');
 
@@ -29,7 +30,7 @@ router.post('/verify',verifyValidator,verifyOtp);
 router.post('/resendOtp',resendOtpValidator,resendOtp);
 
 router.post('/login',loginValidator,Login);
-router.post('/forget-password',unauthrized,forgetPassword)
+router.post('/forget-password',unauthrized,forgetPasswordValidation,forgetPassword)
 router.post('/dashboard',unauthrized,Dashboard);
 router.post('/lognout',unauthrized,lognOut);
 router.post('/update',unauthrized,updatePatientValidation,Upload.single('image'),updateUser);
