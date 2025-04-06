@@ -220,6 +220,27 @@ const loginValidator=[
     .withMessage('Provide password!')
 ];
 
+const forgetPasswordValidation=[
+    body('Email')
+    .notEmpty()
+    .normalizeEmail()
+    .toLowerCase()
+    .custom((value,{req})=>{
+        return Patient.findOne({Email:value})
+        .then(user=>{
+            if(!user){
+                return Promise.reject(
+                    'User with email not found!'
+                )
+            }else if(!user.isVerified){
+                return Promise.reject(
+                    'Email is not verified!'
+                )
+            }
+        })
+    })
+]
+
 const updatePatientValidation=[
     body('Fname')
     .trim()

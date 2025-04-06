@@ -463,4 +463,4 @@ const Dashboard=async(req,res,next)=>{
 }
 
 
-module.exports={Register,verifyOtp,resendOtp,Login ,lognOut,Dashboard,updateUser}
+module.exports={Register,verifyOtp,resendOtp,Login ,lognOut,Dashboard,updateUser,forgetPassword}
