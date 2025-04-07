@@ -6,7 +6,8 @@ const session=require('express-session');
 const {addWeeks}=require('date-fns')
 const port=process.env.PORT || 2000;
 const cors=require('cors')
-const sessionStore=require('connect-mongo')
+const sessionStore=require('connect-mongo');
+
 
 
 
@@ -14,8 +15,12 @@ const app=express()
 
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log('DB connected successfuly !');
-    app.listen(port,()=>{
+    const server=app.listen(port,()=>{
         console.log(`Server is running on http://localhost:${port}`);
+    });
+    const io=require('socket.io')(server)
+    io.on('connection',socket=>{
+        console.log('user connected!')
     })
 })
 
