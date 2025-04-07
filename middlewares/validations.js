@@ -241,6 +241,33 @@ const forgetPasswordValidation=[
     })
 ]
 
+
+const resetPasswordValidation=[
+    body('Email')
+    .notEmpty()
+    .normalizeEmail()
+    .toLowerCase()
+    .escape()
+    .custom((value,{req})=>{
+        return Patient.findOne({Email:value})
+        .then(user=>{
+            if(!user){
+                return Promise.reject(
+                    'User with email not found!'
+                )
+            }else if(!user.isVerified){
+                return Promise.reject(
+                    'Email is not verified!'
+                )
+            }
+        })
+    }),
+    body('Password')
+    .notEmpty()
+    .trim()
+    .withMessage('Please enter password!')
+]
+
 const updatePatientValidation=[
     body('Fname')
     .trim()
@@ -259,4 +286,4 @@ const updatePatientValidation=[
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation}

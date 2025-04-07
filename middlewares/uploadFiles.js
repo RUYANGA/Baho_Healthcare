@@ -1,10 +1,9 @@
-const { fi } = require('date-fns/locale')
 const multer=require('multer')
 
 
 const Filestorage=multer.diskStorage({
     destination:(req,file,cb)=>{
-        cb(null,'Uploads')
+        cb(null,'image')
     },
     filename:(req,file,cb)=>{
         cb(null,new Date().toISOString()+ '-'+ file.originalname)
@@ -21,7 +20,7 @@ const Fileformat=(req,file,cb)=>{
     ){
         cb(null,true)
     }else{
-        cb(null,false)
+        cb(new Error('Only images are allowed!'),false)
     }
 }
 

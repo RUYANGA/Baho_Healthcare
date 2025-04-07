@@ -390,6 +390,33 @@ const forgetPassword=async(req,res,next)=>{
       return next(errors);
   }
 
+};
+
+
+const resetPassword=async(req,res,next)=>{
+ try {
+    const token=req.body.params.token;
+    const {Email,Password}=req.body;
+
+    const patient=await Patient.findOne({Email:Email})
+
+    if(patient.tokenExpired < new Date() || patient.token !==token){
+      return res.status(404).json({message:'Token invalid or expired!'})
+    }
+    const hashPassword=await bcrypt.hash(Password,12);
+
+    patient.token=undefined;
+    patient.token=undefined;
+    patient.Password=hashPassword;
+    await patient.save()
+
+    res.status(201).json({message:'Password reset successfully!'})
+
+ } catch (error) {
+      const errors= new Error(error);
+      errors.statusCode=500;
+      return next(errors);
+ }
 }
 
 
@@ -463,4 +490,4 @@ const Dashboard=async(req,res,next)=>{
 }
 
 
-module.exports={Register,verifyOtp,resendOtp,Login ,lognOut,Dashboard,updateUser,forgetPassword}
+module.exports={Register,verifyOtp,resendOtp,Login ,lognOut,Dashboard,updateUser,forgetPassword,resetPassword}

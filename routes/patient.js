@@ -4,7 +4,8 @@ const {
     resendOtpValidator,
     loginValidator,
     updatePatientValidation,
-    forgetPasswordValidation
+    forgetPasswordValidation,
+    resetPasswordValidation
 
 }=require('../middlewares/validations');
 
@@ -18,7 +19,8 @@ const {
     lognOut,
     Dashboard,
     updateUser,
-    forgetPassword
+    forgetPassword,
+    resetPassword
 
 }=require('../controllers/patient');
 const Upload = require('../middlewares/uploadFiles');
@@ -30,7 +32,8 @@ router.post('/verify',verifyValidator,verifyOtp);
 router.post('/resendOtp',resendOtpValidator,resendOtp);
 
 router.post('/login',loginValidator,Login);
-router.post('/forget-password',unauthrized,forgetPasswordValidation,forgetPassword)
+router.post('/forget-password',forgetPasswordValidation,forgetPassword);
+router.post('reset-password',resetPasswordValidation,resetPassword)
 router.post('/dashboard',unauthrized,Dashboard);
 router.post('/lognout',unauthrized,lognOut);
 router.post('/update',unauthrized,updatePatientValidation,Upload.single('image'),updateUser);
