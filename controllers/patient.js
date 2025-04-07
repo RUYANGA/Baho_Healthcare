@@ -268,13 +268,17 @@ const Login=async(req,res,next)=>{
           return res.status(400).json({error:errorFormat});
       };
 
-      const user =await Patient.findOne({Email:Email});
+      const patient =await Patient.findOne({Email:Email});
 
-      if(!await bcrypt.compare(Password,user.Password)){
+      if(!await bcrypt.compare(Password,patient.Password)){
          return res.status(401).json({message:'Email or password incorect!'});
       };
       req.session.user=user
-      res.status(200).json({message:'Login successfully!'});
+      res.status(200).json({message:'Login successfully!',user:{
+        _id:patient._id,
+        email:patient.Email,
+        firstName:patient.Fname
+      }});
 
   } catch (error) {
 
