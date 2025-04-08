@@ -263,7 +263,7 @@ const Login=async(req,res,next)=>{
       const errors=validationResult(req);
       if(!errors.isEmpty()){
           const errorFormat=errors.array().map(err=>({
-              message:err.msg
+            message:err.msg
           }))
           return res.status(400).json({error:errorFormat});
       };

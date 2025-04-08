@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express=require('express');
 const mongoose=require('mongoose');
-const patientRoute=require('./routes/patient')
 const session=require('express-session');
 const {addWeeks}=require('date-fns')
 const port=process.env.PORT || 2000;
 const cors=require('cors')
 const sessionStore=require('connect-mongo');
+
+const patientRoute=require('./routes/patient');
+const doctorRoute=require('./routes/doctor')
 
 
 
@@ -51,7 +53,11 @@ app.use(session({
 
 
 
-app.use('/api/patient',patientRoute),
+app.use('/api/patient',patientRoute);
+app.use('/api/doctor',doctorRoute);
+
+
+
 // app.use('/',(req,res)=>{
 //     res.send(`
         
