@@ -196,3 +196,12 @@ const Login=async(req,res,next)=>{
   
 };
 
+const Dashboard=async(req,res,next)=>{
+
+  const doctor=await Patient.find({_id:req.session.user._id}).populate('Doctor');
+  if(!user)return res.status(400).json({message:"User not found"});
+ 
+
+  res.status(200).json({Dashboard:doctor})
+}
+
