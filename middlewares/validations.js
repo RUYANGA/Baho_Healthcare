@@ -175,7 +175,7 @@ const verifyDoctorValidator=[
     .escape()
     .withMessage('Provide valid email format')
     .custom(async(email,{req})=>{
-        return Patient.findOne({Email:email})
+        return Doctor.findOne({Email:email})
             .then(user=>{
                 if(!user){
                     return Promise.reject(
