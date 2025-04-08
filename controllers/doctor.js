@@ -5,6 +5,7 @@ const bcrypt=require('bcrypt');
 const {addMinutes}=require('date-fns');
 const crypto=require('crypto');
 const {transipoter}=require('../middlewares/nodemailer');
+const { register } = require('module');
 
 
 
@@ -21,7 +22,7 @@ const Register=async(req,res,next)=>{
         }
         const {Fname,Lname,Email,Password,phone,BirthDate,provence,Spectialisation,currentEmployer,priviousEmployer,gradYear,medSchool,LicenseImage,Language,Bio,Idimage}=req.body
 
-        const imageUrl=req.file.path;
+        //const imageUrl=req.file.path;
 
         const hashPassword= await bcrypt.hash(Password,12);
         const otp=crypto.randomInt(100000,999999).toString()
@@ -40,7 +41,9 @@ const Register=async(req,res,next)=>{
             priviousEmployer,
             gradYear,
             medSchool,
-            LicenseImage:imageUrl,
+            Bio,
+            Language,
+            //LicenseImage:imageUrl,
             Password:hashPassword,
             otp,
             otpExpired
@@ -205,3 +208,4 @@ const Dashboard=async(req,res,next)=>{
   res.status(200).json({Dashboard:doctor})
 }
 
+module.exports={Register,Login}

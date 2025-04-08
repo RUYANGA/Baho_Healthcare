@@ -24,7 +24,7 @@ const doctorSchema=new mongoose.Schema({
         required:true
     },
     BirthDate:{
-        type:Date,
+        type:String,
         required:true
     },
     provence:{
@@ -43,7 +43,7 @@ const doctorSchema=new mongoose.Schema({
         type:String
     },
     gradYear:{
-        type:String
+        type:Number
     },
     medSchool:{
         type:String,

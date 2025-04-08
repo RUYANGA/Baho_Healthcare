@@ -122,7 +122,6 @@ const doctorSignup=[
     .withMessage('Privious employee required'),
     body('gradYear')
     .notEmpty()
-    .isDate()
     .escape()
     .withMessage('Provide graduation year!'),
     body('medSchool')
@@ -286,4 +285,4 @@ const updatePatientValidation=[
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup}
