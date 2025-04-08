@@ -26,9 +26,9 @@ const userSchem=new mongoose.Schema({
         type:Number,
         //required:true
     },
-    Doctor:{
+    apointment:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Doctor"
+        ref:"Apointment"
     },
     image:{
         type:String

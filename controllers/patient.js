@@ -291,7 +291,7 @@ const Login=async(req,res,next)=>{
 
 const forgetPassword=async(req,res,next)=>{
   try {
-        const {Email}=req.body;
+      const {Email}=req.body;
 
       const errors=validationResult(req);
       if(!errors.isEmpty()){
@@ -310,7 +310,8 @@ const forgetPassword=async(req,res,next)=>{
         from:process.env.EMAIL,
         to:Email,
         subject:'RESET PASSWORD',
-        html:` <!DOCTYPE html>
+        html:`
+        <!DOCTYPE html>
         <html>
         <head>
         <meta charset="utf-8">
@@ -492,6 +493,10 @@ const updateUser=async(req,res,next)=>{
      return next(errors);
   }
 };
+
+const addDoctor=async(req,res,next)=>{
+  
+}
 
 const Dashboard=async(req,res,next)=>{
 

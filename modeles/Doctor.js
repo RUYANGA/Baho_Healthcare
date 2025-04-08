@@ -65,9 +65,9 @@ const doctorSchema=new mongoose.Schema({
         type:String,
         //required:true
     },
-    Patient:{
+    apointment:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Patient"
+        ref:"Apointment"
     },
     isVerified:{
         type:Boolean,
