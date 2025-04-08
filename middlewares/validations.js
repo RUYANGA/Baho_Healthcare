@@ -276,6 +276,32 @@ const loginValidator=[
     .withMessage('Provide password!')
 ];
 
+const loginDoctorValidator=[
+    body('Email')
+    .notEmpty()
+    .normalizeEmail()
+    .escape()
+    .withMessage('Provide valid email format')
+    .custom((value,{req})=>{
+        return Doctor.findOne({Email:value})
+        .then(user=>{
+            if(!user){
+                return Promise.reject(
+                    'Email or password incorect!'
+                );
+            }else if(!user.isVerified){
+                return Promise.reject(
+                    'Email is not varified!'
+                );
+            }
+        })
+    }),
+    body('Password')
+    .notEmpty()
+    .trim()
+    .withMessage('Provide password!')
+];
+
 const forgetPasswordValidation=[
     body('Email')
     .notEmpty()
@@ -342,4 +368,4 @@ const updatePatientValidation=[
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator,resendOtpDoctorValidator}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator,loginDoctorValidator}
