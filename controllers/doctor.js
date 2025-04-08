@@ -208,4 +208,4 @@ const Dashboard=async(req,res,next)=>{
   res.status(200).json({Dashboard:doctor})
 }
 
-module.exports={Register,Login}
+module.exports={Register,Login,verifyOtp}

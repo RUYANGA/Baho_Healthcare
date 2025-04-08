@@ -166,6 +166,37 @@ const verifyValidator=[
    
 ];
 
+const verifyDoctorValidator=[
+    body('Email')
+    .notEmpty()
+    .normalizeEmail()
+    .toLowerCase()
+    .trim()
+    .escape()
+    .withMessage('Provide valid email format')
+    .custom(async(email,{req})=>{
+        return Patient.findOne({Email:email})
+            .then(user=>{
+                if(!user){
+                    return Promise.reject(
+                        'User with email not found!'
+                        
+                    )
+                }else if(user.isVerified){
+                    return Promise.reject(
+                        'Email already verified'
+                    )
+                }
+            })
+        
+    }),
+    body('Otp')
+    .notEmpty()
+    .escape()
+    .withMessage('Otp required!'),
+   
+];
+
 const resendOtpValidator=[
     body('Email')
     .notEmpty()
@@ -285,4 +316,4 @@ const updatePatientValidation=[
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator}

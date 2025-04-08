@@ -1,6 +1,6 @@
 const {
     siginupValidator,
-    verifyValidator,
+    verifyDoctorValidator,
     resendOtpValidator,
     loginValidator,
     updatePatientValidation,
@@ -13,12 +13,12 @@ const Upload=require('../middlewares/uploadFiles');
 
 const {unauthrized,Admin}=require('../middlewares/authorize');
 
-const { Register,Login }=require('../controllers/doctor');
+const { Register,Login ,verifyOtp}=require('../controllers/doctor');
 
 const router=require('express').Router();
 router.post('/signup',doctorSignup,Upload.single('image'),Register);
 
-// router.post('/verify',verifyValidator,verifyOtp);
+router.post('/verify',verifyDoctorValidator,verifyOtp);
 // router.post('/resendOtp',resendOtpValidator,resendOtp);
 
 // router.post('/login',loginValidator,Login);
