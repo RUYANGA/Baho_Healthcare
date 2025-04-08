@@ -8,9 +8,9 @@ const {
 
 }=require('../middlewares/validations');
 
-const Upload=require('../middlewares/uploadFiles')
+const Upload=require('../middlewares/uploadFiles');
 
-const {unauthrized,Admin}=require('../middlewares/authorize')
+const {unauthrized,Admin}=require('../middlewares/authorize');
 
 const {
     Register,
@@ -21,7 +21,7 @@ const {
     Dashboard,
     updateUser
 
-}=require('../controllers/patient')
+}=require('../controllers/patient');
 
 const router=require('express').Router();
 router.post('/signup',siginupValidator,Upload.single('image'),Register);
