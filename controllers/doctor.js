@@ -303,6 +303,24 @@ const Login=async(req,res,next)=>{
   
 };
 
+
+const lognOut=async(req,res,next)=>{
+  try {
+      
+      req.session.destroy((err)=>{
+          if(err)return res.status(500).json({message:'Error to logn out'});
+      })
+      res.clearCookie('connect.sid');
+      res.status(200).json({message:"Logn out successfuly"})
+
+  } catch (error) {
+
+    const errors= new Error(error);
+    errors.statusCode=500;
+    return next(errors);
+  }
+};
+
 const Dashboard=async(req,res,next)=>{
 
   const doctor=await Doctor.find({_id:req.session.user._id}).populate('Doctor');
@@ -312,4 +330,4 @@ const Dashboard=async(req,res,next)=>{
   res.status(200).json({Dashboard:doctor})
 }
 
-module.exports={Register,Login,verifyOtp,Dashboard,resendOtp}
+module.exports={Register,Login,verifyOtp,Dashboard,resendOtp,lognOut}
