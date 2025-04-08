@@ -194,7 +194,7 @@ const resendOtp=async(req,res,next)=>{
                    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
                    <!-- Header -->
                    <div style="background-color: #4A90E2; padding: 24px; text-align: center;">
-                       <h1 style="color: #ffffff; margin: 0; font-size: 26px;">Welcome to BINARY HUB  Intern</h1>
+                       <h1 style="color: #ffffff; margin: 0; font-size: 26px;">Welcome to BAHO Healthcare</h1>
                    </div>
                    
                    <!-- Content -->
@@ -273,7 +273,7 @@ const Login=async(req,res,next)=>{
       if(!await bcrypt.compare(Password,patient.Password)){
          return res.status(401).json({message:'Email or password incorect!'});
       };
-      req.session.user=user
+      req.session.user=patient
       res.status(200).json({message:'Login successfully!',user:{
         _id:patient._id,
         email:patient.Email,
@@ -309,7 +309,7 @@ const forgetPassword=async(req,res,next)=>{
 
         from:process.env.EMAIL,
         to:Email,
-        subject:'OTP VERIFICATION CODE',
+        subject:'RESET PASSWORD',
         html:` <!DOCTYPE html>
         <html>
         <head>
@@ -325,21 +325,21 @@ const forgetPassword=async(req,res,next)=>{
                 <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
                 <!-- Header -->
                 <div style="background-color: #4A90E2; padding: 24px; text-align: center;">
-                    <h1 style="color: #ffffff; margin: 0; font-size: 26px;">Welcome to BINARY HUB  Intern</h1>
+                    <h1 style="color: #ffffff; margin: 0; font-size: 26px;">WElcome to BAHO Healthcare</h1>
                 </div>
                 
                 <!-- Content -->
                 <div style="padding: 24px; line-height: 1.6;">
-                    <p style="margin-top: 0; color: #333333; font-size: 16px;">Hello 👋 ${user.Lname},</p>
+                    <p style="margin-top: 0; color: #333333; font-size: 16px;">Hello 👋 ${patient.Lname},</p>
                     
-                    <p style="color: #333333; font-size: 16px;">Thank you for signing up! We're excited to have you on board.</p>
+                    <p style="color: #333333; font-size: 16px;">Thank you for choosing us ! We're excited to have you on board.</p>
                     
-                    <p style="color: #333333; font-size: 16px;">Here are verification code  to help you get started this code expired in 15 minutes:</p>
+                    <p style="color: #333333; font-size: 16px;">Here are reset password link  to help you rest your password this link expired in 30 minutes:</p>
                     
                 
                     
                     <div style="margin: 30px 0; text-align: center;">
-                    <h1 style="background-color: #4A90E2; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 4px; font-weight: bold; display: inline-block;"><a href='http://localhost:2000/reset-password/${token}'>Reset password</a></h1>
+                    <h1 style="background-color: #4A90E2; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 4px; font-weight: bold; display: inline-block;"><a style="color: #ffffff; " href='http://localhost:2000/reset-password/${token}'>Reset password</a></h1>
                     </div>
                     
                     <p style="color: #333333; font-size: 16px;">If you have any questions, just reply to this email. We're always here to help!</p>
@@ -357,17 +357,17 @@ const forgetPassword=async(req,res,next)=>{
                     <a href="#" style="color: #777777; text-decoration: underline;">Privacy Policy</a>
                     </p>
                     <div style="margin-top: 20px;">
-                    <a href="https://www.facebook.com/ruyanga.merci.1" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
-                    
-                        <i class="bi bi-facebook"></i>
-                    </a>
-                    <a href="https://x.com/RuyangaM" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
-                        <i class="bi bi-twitter-x"></i>
-                    </a>
-                    <a href="https://github.com/RUYANGA" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
-                        <i class="bi bi-github"></i>
-                    </a>
-                    </div>
+                       <a href="https://www.facebook.com/ruyanga.merci.1" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
+                       
+                           <i class="bi bi-facebook"></i>
+                       </a>
+                       <a href="https://x.com/RuyangaM" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
+                           <i class="bi bi-twitter-x"></i>
+                       </a>
+                       <a href="https://github.com/RUYANGA" style="display: inline-block; margin: 0 10px; color: #4A90E2;">
+                           <i class="bi bi-github"></i>
+                       </a>
+                       </div>
                 </div>
                 </div>
             </td>
@@ -399,7 +399,7 @@ const forgetPassword=async(req,res,next)=>{
 
 const resetPassword=async(req,res,next)=>{
  try {
-    const token=req.body.params.token;
+    const token=req.params.token;
     const {Email,Password}=req.body;
 
     const patient=await Patient.findOne({Email:Email})
@@ -454,6 +454,9 @@ const updateUser=async(req,res,next)=>{
            }))
            return res.status(400).json({error:errorFormat});
        };
+
+       let image
+
  
        
        const id=req.session.user._id;
@@ -464,10 +467,15 @@ const updateUser=async(req,res,next)=>{
        if(Password){
           hashPassword=await bcrypt.hash(Password,10);
        };
+
+       
+       if(imageUrl){
+          await Patient.findByIdAndUpdate({_id:id},{$set:{image:imageUrl}})
+       }
        
        let userSave;
        try {
-           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname:Fname? Fname:user.Fname,Lname:Lname ? Lname:user.Lname,Email:Email ? Email:user.Email,Password:Password ? hashPassword:user.Password,image:imageUrl}},{new:true});
+           userSave=await Patient.findByIdAndUpdate({_id:id},{$set:{Fname:Fname? Fname:user.Fname,Lname:Lname ? Lname:user.Lname,Email:Email ? Email:user.Email,Password:Password ? hashPassword:user.Password}},{new:true});
        } catch (error) {
          const errors= new Error(error);
          errors.statusCode=500;
