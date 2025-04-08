@@ -33,7 +33,7 @@ router.post('/resendOtp',resendOtpValidator,resendOtp);
 
 router.post('/login',loginValidator,Login);
 router.post('/forget-password',forgetPasswordValidation,forgetPassword);
-router.post('reset-password/:token',resetPasswordValidation,resetPassword)
+router.post('/reset-password/:token',resetPasswordValidation,resetPassword)
 router.post('/dashboard',unauthrized,Dashboard);
 router.post('/lognout',unauthrized,lognOut);
 router.post('/update',unauthrized,updatePatientValidation,Upload.single('image'),updateUser);

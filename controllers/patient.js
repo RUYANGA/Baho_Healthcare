@@ -271,7 +271,7 @@ const Login=async(req,res,next)=>{
       const patient =await Patient.findOne({Email:Email});
 
       if(!await bcrypt.compare(Password,patient.Password)){
-         return res.status(401).json({message:'Email or password incorect!'});
+         return res.status(404).json({message:'Email or password incorect!'});
       };
       req.session.user=patient
       res.status(200).json({message:'Login successfully!',user:{
@@ -403,8 +403,9 @@ const resetPassword=async(req,res,next)=>{
     const {Email,Password}=req.body;
 
     const patient=await Patient.findOne({Email:Email})
+    const currentDate=new Date()
 
-    if(patient.tokenExpired < new Date() || patient.token !==token){
+    if(patient.tokenExpired < currentDate || patient.token !==token){
       return res.status(404).json({message:'Token invalid or expired!'})
     }
     const hashPassword=await bcrypt.hash(Password,12);

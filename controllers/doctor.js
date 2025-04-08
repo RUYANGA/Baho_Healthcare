@@ -162,3 +162,37 @@ const verifyOtp=async(req,res,next)=>{
   }
 }
 
+const Login=async(req,res,next)=>{
+
+  try {
+      const {Email,Password}=req.body;
+
+      const errors=validationResult(req);
+      if(!errors.isEmpty()){
+          const errorFormat=errors.array().map(err=>({
+              message:err.msg
+          }))
+          return res.status(400).json({error:errorFormat});
+      };
+
+      const doctor =await Doctor.findOne({Email:Email});
+
+      if(!await bcrypt.compare(Password,doctor.Password)){
+         return res.status(404).json({message:'Email or password incorect!'});
+      };
+      req.session.user=doctor
+      res.status(200).json({message:'Login successfully!',user:{
+        _id:doctor._id,
+        email:doctor.Email,
+        firstName:doctor.Fname
+      }});
+
+  } catch (error) {
+
+          const err=new Error(error);
+          err.status=500,
+          next(err)
+  }
+  
+};
+
