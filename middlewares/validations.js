@@ -223,6 +223,32 @@ const resendOtpValidator=[
 ];
 
 
+const resendOtpDoctorValidator=[
+    body('Email')
+    .notEmpty()
+    .withMessage('Email is required')
+    .normalizeEmail()
+    .toLowerCase()
+    .trim()
+    .escape()
+    .withMessage('Provide valid email format')
+    .custom((value,{req})=>{
+        return Doctor.findOne({Email:value})
+        .then(user=>{
+            if(!user){
+                return Promise.reject(
+                    'User with emaill not found'
+                )
+            }else if(user.isVerified){
+                return Promise.reject(
+                    'Email already verified'
+                )
+            }
+        })
+    })
+];
+
+
 
 const loginValidator=[
     body('Email')
@@ -316,4 +342,4 @@ const updatePatientValidation=[
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator,resendOtpDoctorValidator}

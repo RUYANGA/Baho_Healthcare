@@ -184,7 +184,7 @@ const resendOtp=async(req,res,next)=>{
        const currentDate=new Date();
        const otpExpired=addMinutes(currentDate,15);
 
-       patient.Otp=otp;
+       patient.otp=otp;
        patient.otpExpired=otpExpired;
        await patient.save();
 
@@ -312,4 +312,4 @@ const Dashboard=async(req,res,next)=>{
   res.status(200).json({Dashboard:doctor})
 }
 
-module.exports={Register,Login,verifyOtp,Dashboard}
+module.exports={Register,Login,verifyOtp,Dashboard,resendOtp}
