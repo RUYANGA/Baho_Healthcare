@@ -367,9 +367,23 @@ const updatePatientValidation=[
 
 const newApointmentValidation=[
     body('reason')
+    .notEmpty()
+    .escape()
+    .withMessage('Please privide reason of apointment'),
+    body('discription')
+    .notEmpty()
+    .escape()
+    .isLength({min:3})
+    .withMessage('Provide discriptions of apointment!'),
+    body('date')
+    .notEmpty()
+    .escape()
+    .isDate()
+    .withMessage('Provide date'),
+    body()
 ]
 
 
 
 
-module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator,loginDoctorValidator}
+module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator,loginDoctorValidator,newApointmentValidation}
