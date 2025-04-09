@@ -33,8 +33,8 @@ const addApointments=async(req,res,next)=>{
 
         });
 
-        // await Doctor.findByIdAndUpdate({_id:doctorId},{$set:{apointment:newApointment._id}},{new:true});
-        // await Patient.findByIdAndUpdate({_id:patiantId},{$set:{apointment:newApointment._id}},{new:true})
+        await Doctor.findByIdAndUpdate({_id:doctorId},{$set:{apointment:newApointment._id}},{new:true});
+        await Patient.findByIdAndUpdate({_id:patiantId},{$set:{apointment:newApointment._id}},{new:true})
 
         res.status(201).json({message:'Apointment created successfully',Apointment:newApointment})
 
