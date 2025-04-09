@@ -500,7 +500,7 @@ const addDoctor=async(req,res,next)=>{
 
 const Dashboard=async(req,res,next)=>{
 
-  const user=await Patient.find({_id:req.session.user._id}).populate('Doctor');
+  const user=await Patient.find({_id:req.session.user._id}).populate('apointment');
   if(!user)return res.status(400).json({message:"User not found"});
  
 

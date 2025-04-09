@@ -380,7 +380,11 @@ const newApointmentValidation=[
     .escape()
     .isDate()
     .withMessage('Provide date'),
-    body()
+    body('time')
+    .notEmpty()
+    .escape()
+    .isTime()
+    .withMessage('Provide time')
 ]
 
 
