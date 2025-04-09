@@ -365,6 +365,10 @@ const updatePatientValidation=[
     .escape()
 ]
 
+const newApointmentValidation=[
+    body('reason')
+]
+
 
 
 
