@@ -8,7 +8,8 @@ const cors=require('cors')
 const sessionStore=require('connect-mongo');
 
 const patientRoute=require('./routes/patient');
-const doctorRoute=require('./routes/doctor')
+const doctorRoute=require('./routes/doctor');
+const apointmentRouter=require('./routes/apointment')
 
 
 
@@ -55,6 +56,7 @@ app.use(session({
 
 app.use('/api/patient',patientRoute);
 app.use('/api/doctor',doctorRoute);
+app.use('/api/apointment',apointmentRouter)
 
 
 
