@@ -35,7 +35,7 @@ app.use(cors({
     origin:process.env.FRONTEND_URL,
     allowedHeaders: "Content-Type",
     credentials:true,
-    methods:['GET','POST','PUT','PUCH','DELETE']
+    methods:['GET','POST','PUT','PACH','DELETE']
 }))
 
 app.use(session({
@@ -46,8 +46,8 @@ app.use(session({
         mongoUrl:process.env.DB_URL
     }),
     cookie:{
-        secure:true,
-        httpOnly:true,
+        secure:false,
+        httpOnly:false,
         maxAge:1000*60*60*24*7
     }
 }))
