@@ -46,8 +46,8 @@ app.use(session({
         mongoUrl:process.env.DB_URL
     }),
     cookie:{
-        secure:false,
-        httpOnly:false,
+        secure:true,
+        httpOnly:true,
         maxAge:1000*60*60*24*7
     }
 }))
