@@ -49,10 +49,10 @@ const addApointments=async(req,res,next)=>{
 const updateApointments=async(req,res,next)=>{
     try {
         const patiantId=req.session.user._id;
-        const doctorId=req.params.id;
+        const apointmentId=req.params.apointmentId;
+        const doctorId=req.params.id
 
-        const patient=await Patient.findOne({_id:patiantId});
-        const doctor=await Doctor.findOne({_id:doctorId});
+           
 
         const{date,time,reason,discription}=req.body;
 
@@ -64,12 +64,12 @@ const updateApointments=async(req,res,next)=>{
             return res.status(400).json({error:errorFormat})
         }
 
-        const newApointment=await Apointment.findByIdAndUpdate({_id:patiantId},{$set:{doctor:doctorId,reason:reason,discription:discription,date:date,time:time}});
+        const updateApointment=await Apointment.findByIdAndUpdate({_id:apointmentId},{$set:{reason:reason,discription:discription,date:date,time:time}});
 
-        await Doctor.findByIdAndUpdate({_id:doctorId},{$set:{apointment:newApointment._id}},{new:true});
-        await Patient.findByIdAndUpdate({_id:patiantId},{$set:{apointment:newApointment._id}},{new:true})
+        await Doctor.findByIdAndUpdate({_id:doctorId},{$set:{apointment:updateApointment._id}},{new:true});
+        await Patient.findByIdAndUpdate({_id:patiantId},{$set:{apointment:updateApointment._id}},{new:true})
 
-        res.status(201).json({message:'Apointment update successfully',Apointment:newApointment})
+        res.status(201).json({message:'Apointment update successfully, chech your dashboard'})
 
     } catch (error) {
         const err=new Error(error);

@@ -9,6 +9,6 @@ const router=require('express').Router()
 
 
 router.post('/addApointment/:id',unauthrized,newApointmentValidation,addApointments)
-router.patch('/update',updateApointments)
+router.patch('/update/:apointmentId/doctor/:id',updateApointments)
 
 module.exports=router
