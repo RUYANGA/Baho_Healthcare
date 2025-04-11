@@ -1,8 +1,10 @@
+
 const { body }=require('express-validator')
 const Patient=require('../modeles/Patient');
 const Doctor = require('../modeles/Doctor');
 
 
+//middleware to validate patient sign up
 
 const siginupValidator=[
     body('Fname')
@@ -46,6 +48,8 @@ const siginupValidator=[
     .escape()
     .withMessage('Password must be contain character , numbers ,symbol and 8 length')
 ];
+
+//middlewares to validate doctor registrations
 
 const doctorSignup=[
     body('Fname')
@@ -135,6 +139,9 @@ const doctorSignup=[
     
 ];
 
+
+//middlewares to varidate  patient verification otp code
+
 const verifyValidator=[
     body('Email')
     .notEmpty()
@@ -166,6 +173,8 @@ const verifyValidator=[
    
 ];
 
+//middleware to validate doctor verification otp code
+
 const verifyDoctorValidator=[
     body('Email')
     .notEmpty()
@@ -196,6 +205,8 @@ const verifyDoctorValidator=[
     .withMessage('Otp required!'),
    
 ];
+
+
 
 const resendOtpValidator=[
     body('Email')
