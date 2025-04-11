@@ -1,6 +1,6 @@
 const multer=require('multer')
 
-
+//fuction to define storage of files
 const Filestorage=multer.diskStorage({
     destination:(req,file,cb)=>{
         cb(null,'image')
@@ -10,6 +10,7 @@ const Filestorage=multer.diskStorage({
     }
 })
 
+//function to validate files type
 const Fileformat=(req,file,cb)=>{
     if(
         file.mimetype === 'image/png' ||
@@ -24,6 +25,7 @@ const Fileformat=(req,file,cb)=>{
     }
 }
 
+//valiable to handle file uploads
 const Upload=multer({storage:Filestorage,fileFilter:Fileformat});
 
 

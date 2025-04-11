@@ -207,6 +207,7 @@ const verifyDoctorValidator=[
 ];
 
 
+//middleware to validate resend otp code of pantients
 
 const resendOtpValidator=[
     body('Email')
@@ -233,6 +234,7 @@ const resendOtpValidator=[
     })
 ];
 
+//middleware to validate resend otp code of doctor
 
 const resendOtpDoctorValidator=[
     body('Email')
@@ -259,7 +261,7 @@ const resendOtpDoctorValidator=[
     })
 ];
 
-
+//middleware to validate login patient 
 
 const loginValidator=[
     body('Email')
@@ -287,6 +289,9 @@ const loginValidator=[
     .withMessage('Provide password!')
 ];
 
+
+//middleware to validate login doctor
+
 const loginDoctorValidator=[
     body('Email')
     .notEmpty()
@@ -313,6 +318,8 @@ const loginDoctorValidator=[
     .withMessage('Provide password!')
 ];
 
+//middleware to validate forget password
+
 const forgetPasswordValidation=[
     body('Email')
     .notEmpty()
@@ -334,6 +341,7 @@ const forgetPasswordValidation=[
     })
 ]
 
+//middleware to validate reset password 
 
 const resetPasswordValidation=[
     body('Email')
@@ -361,6 +369,8 @@ const resetPasswordValidation=[
     .withMessage('Please enter password!')
 ]
 
+
+//middleware to validate update patient 
 const updatePatientValidation=[
     body('Fname')
     .trim()
@@ -375,6 +385,9 @@ const updatePatientValidation=[
     .trim()
     .escape()
 ]
+
+
+//middleware to validate new appointments
 
 const newApointmentValidation=[
     body('reason')
@@ -400,5 +413,6 @@ const newApointmentValidation=[
 
 
 
+//export of all functions
 
 module.exports={siginupValidator,verifyValidator,resendOtpValidator,loginValidator,updatePatientValidation,forgetPasswordValidation,resetPasswordValidation,doctorSignup,verifyDoctorValidator,loginDoctorValidator,newApointmentValidation}
