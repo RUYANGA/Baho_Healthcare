@@ -1,5 +1,7 @@
 const nodemailer=require('nodemailer');
 
+
+//middleware to handle nodemailer
 const transipoter=nodemailer.createTransport({
     service:'gmail',
     auth:{
