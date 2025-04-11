@@ -9,9 +9,11 @@ const {transipoter}=require('../middlewares/nodemailer');
 
 
 
-
+//fuction to register user 
 const Register=async(req,res,next)=>{
     try {
+
+        
         const errors=validationResult(req);
         if(!errors.isEmpty()){
             const formatError=errors.array().map(err=>({
@@ -26,6 +28,7 @@ const Register=async(req,res,next)=>{
         const currentDate=new Date();
         const otpExpired=addMinutes(currentDate,15);
 
+        //create new user in database
         const user=await Patient.create({
             Fname,
             Lname,
@@ -35,6 +38,8 @@ const Register=async(req,res,next)=>{
             otpExpired
         })
       
+        //send email of otp code used to verify 
+
         await transipoter.sendMail({
             from:'BAHO HEALTH',
             to:Email,
@@ -105,21 +110,25 @@ const Register=async(req,res,next)=>{
            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         </body>
         </html>`
-        })
+        });
+
         res.status(200).json({message:'User register successfully'});
 
     } catch (error) {
+
         const errors=new Error(error);
         errors.statusCode=500;
         return next(errors)
     }
 }
 
+
+//fuction to verify otp code 
 const verifyOtp=async(req,res,next)=>{
   try {
 
         const {Email,Otp}=req.body;
-
+        
         const errors=validationResult(req);
         if(!errors.isEmpty()){
             const errorFormat=errors.array().map(err=>({
