@@ -161,7 +161,7 @@ const verifyOtp=async(req,res,next)=>{
 
 
 
-
+//fuction to resend otp code
 const resendOtp=async(req,res,next)=>{
   try {
 
