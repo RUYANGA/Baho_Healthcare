@@ -6,6 +6,8 @@ const {validationResult}=require('express-validator');
 
 const showPatient=async(req,res,next)=>{
 
+    const=
+
 }
 
 const showDoctors=async(req,res,next)=>{
