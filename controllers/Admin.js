@@ -6,7 +6,9 @@ const {validationResult}=require('express-validator');
 
 const showPatient=async(req,res,next)=>{
 
-    const=
+    const admin=req.session.user._id
+
+    const patient=await Patient.find()
 
 }
 
