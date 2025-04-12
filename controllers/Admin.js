@@ -10,6 +10,8 @@ const showPatient=async(req,res,next)=>{
         const admin=req.session.user._id
 
         const patients=await Patient.find()
+
+        res.status(200).json({getAllPatints:patients})
  
    } catch (error) {
     
