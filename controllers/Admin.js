@@ -8,12 +8,14 @@ const showPatient=async(req,res,next)=>{
 
     const admin=req.session.user._id
 
-   const patient=await Patient.find()
+   const patients=await Patient.find()
 
 }
 
 const showDoctors=async(req,res,next)=>{
     const admin=req.session.user._id
+
+    const doctors=
 
 }
 
