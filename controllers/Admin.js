@@ -5,5 +5,12 @@ const {validationResult}=require('express-validator');
 
 
 const showPatient=async(req,res,next)=>{
-    
+
 }
+
+const showDoctors=async(req,res,next)=>{
+
+}
+
+
+module.exports={showDoctors,showPatient}
