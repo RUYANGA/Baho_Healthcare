@@ -9,6 +9,14 @@ const showPatient=async(req,res,next)=>{
    try {
         const admin=req.session.user._id
 
+        const errors=validationResult(req);
+                if(!errors.isEmpty()){
+                    const errorFormat=errors.array().map(err=>({
+                        message:err.msg
+                    }))
+                    return res.status(400).json({error:errorFormat})
+                }
+
         const patients=await Patient.find()
 
         res.status(200).json({getAllPatints:patients})
@@ -20,6 +28,14 @@ const showPatient=async(req,res,next)=>{
 
 const showDoctors=async(req,res,next)=>{
     const admin=req.session.user._id
+
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        const errorFormat=errors.array().map(err=>({
+            message:err.msg
+        }))
+            return res.status(400).json({error:errorFormat})
+    }
 
     const doctors=await Doctor.find()
 
