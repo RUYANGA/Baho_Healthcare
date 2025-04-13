@@ -5,7 +5,8 @@ const router=require('express').Router()
 
 
 
-router.get('/allPatients',unauthrized,Admin,showPatient)
+router.get('/patient/getAll',unauthrized,Admin,showPatient)
+router.get('/doctor/getAll',showDoctors)
 
 
 
