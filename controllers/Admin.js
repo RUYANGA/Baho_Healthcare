@@ -18,7 +18,7 @@ const showPatient=async(req,res,next)=>{
                 }
 
         const patients=await Patient.find().sort({Fname:1})
-        const count=await Patient.find().sort({Fname:1}).countDocuments()
+        const count=await Patient.find().countDocuments()
 
         res.status(200).json({Total:count,getAllPatints:patients})
  
@@ -39,6 +39,7 @@ const showDoctors=async(req,res,next)=>{
     }
 
     const doctors=await Doctor.find().sort({Fname:-1})
+    const count=await Patient.find()
 
     res.status(200).json({Docttors:doctors})
 
