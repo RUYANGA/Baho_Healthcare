@@ -37,7 +37,9 @@ const showDoctors=async(req,res,next)=>{
             return res.status(400).json({error:errorFormat})
     }
 
-    const doctors=await Doctor.find()
+    const doctors=await Doctor.find().sort({Fname:-1})
+
+    res.status(200).json({Docttors:doctors})
 
 }
 
