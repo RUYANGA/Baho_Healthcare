@@ -40,6 +40,10 @@ const userSchem=new mongoose.Schema({
     Otp:{
         type:String
     },
+    isAdmin:{
+        type:Boolean,
+        default:false
+    },
     otpExpired:{
         type:Date
     }
