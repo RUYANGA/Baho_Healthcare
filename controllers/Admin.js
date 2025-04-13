@@ -17,9 +17,10 @@ const showPatient=async(req,res,next)=>{
                     return res.status(400).json({error:errorFormat})
                 }
 
-        const patients=await Patient.find()
+        const patients=await Patient.find().sort({Fname:1})
+        const count=await Patient.find().sort({Fname:1}).countDocuments()
 
-        res.status(200).json({getAllPatints:patients})
+        res.status(200).json({getAllPatints:patients,Total:count})
  
    } catch (error) {
     
