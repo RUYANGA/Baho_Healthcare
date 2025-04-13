@@ -20,7 +20,7 @@ const showPatient=async(req,res,next)=>{
         const patients=await Patient.find().sort({Fname:1})
         const count=await Patient.find().sort({Fname:1}).countDocuments()
 
-        res.status(200).json({getAllPatints:patients,Total:count})
+        res.status(200).json({Total:count,getAllPatints:patients})
  
    } catch (error) {
     
